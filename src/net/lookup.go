@@ -21,6 +21,7 @@ var protocols = map[string]int{
 	"tcp": 6, "TCP": 6,
 	"udp": 17, "UDP": 17,
 	"ipv6-icmp": 58, "IPV6-ICMP": 58, "IPv6-ICMP": 58,
+	"sctp": 132, "SCTP": 132,
 }
 
 // LookupHost looks up the given host using the local resolver.

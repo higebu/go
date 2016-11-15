@@ -37,6 +37,8 @@ func isIPv4(addr Addr) bool {
 		return addr.IP.To4() != nil
 	case *IPAddr:
 		return addr.IP.To4() != nil
+	case *SCTPAddr:
+		return addr.IP.To4() != nil
 	}
 	return false
 }
@@ -197,7 +199,7 @@ func internetAddrList(ctx context.Context, net, addr string) (addrList, error) {
 		portnum    int
 	)
 	switch net {
-	case "tcp", "tcp4", "tcp6", "udp", "udp4", "udp6":
+	case "tcp", "tcp4", "tcp6", "udp", "udp4", "udp6", "sctp", "sctp4", "sctp6":
 		if addr != "" {
 			if host, port, err = SplitHostPort(addr); err != nil {
 				return nil, err
@@ -221,6 +223,8 @@ func internetAddrList(ctx context.Context, net, addr string) (addrList, error) {
 			return &UDPAddr{IP: ip.IP, Port: portnum, Zone: ip.Zone}
 		case "ip", "ip4", "ip6":
 			return &IPAddr{IP: ip.IP, Zone: ip.Zone}
+		case "sctp", "sctp4", "sctp6":
+			return &SCTPAddr{IP: ip.IP, Port: portnum, Zone: ip.Zone}
 		default:
 			panic("unexpected network: " + net)
 		}
