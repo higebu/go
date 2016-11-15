@@ -49,6 +49,23 @@ func newLocalListener(network string) (Listener, error) {
 		}
 	case "unix", "unixpacket":
 		return Listen(network, testUnixAddr())
+	case "sctp":
+		if supportsIPv4() {
+			if ln, err := Listen("sctp4", "127.0.0.1:0"); err == nil {
+				return ln, nil
+			}
+		}
+		if supportsIPv6() {
+			return Listen("sctp6", "[::1]:0")
+		}
+	case "sctp4":
+		if supportsIPv4() {
+			return Listen("sctp4", "127.0.0.1:0")
+		}
+	case "sctp6":
+		if supportsIPv6() {
+			return Listen("sctp6", "[::1]:0")
+		}
 	}
 	return nil, fmt.Errorf("%s is not supported", network)
 }
