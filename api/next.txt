@@ -1,0 +1,159 @@
+pkg net, const SCTP_ADAPTATION_INDICATION = 32775
+pkg net, const SCTP_ADAPTATION_INDICATION ideal-int
+pkg net, const SCTP_ADAPTATION_LAYER = 7
+pkg net, const SCTP_ADAPTATION_LAYER ideal-int
+pkg net, const SCTP_ASSOCINFO = 1
+pkg net, const SCTP_ASSOCINFO ideal-int
+pkg net, const SCTP_ASSOC_CHANGE = 32769
+pkg net, const SCTP_ASSOC_CHANGE ideal-int
+pkg net, const SCTP_AUTHENTICATION_INDICATION = 32776
+pkg net, const SCTP_AUTHENTICATION_INDICATION ideal-int
+pkg net, const SCTP_AUTH_ACTIVE_KEY = 24
+pkg net, const SCTP_AUTH_ACTIVE_KEY ideal-int
+pkg net, const SCTP_AUTH_CHUNK = 21
+pkg net, const SCTP_AUTH_CHUNK ideal-int
+pkg net, const SCTP_AUTH_DELETE_KEY = 25
+pkg net, const SCTP_AUTH_DELETE_KEY ideal-int
+pkg net, const SCTP_AUTH_KEY = 23
+pkg net, const SCTP_AUTH_KEY ideal-int
+pkg net, const SCTP_AUTOCLOSE = 4
+pkg net, const SCTP_AUTOCLOSE ideal-int
+pkg net, const SCTP_AUTO_ASCONF = 30
+pkg net, const SCTP_AUTO_ASCONF ideal-int
+pkg net, const SCTP_BINDX_ADD_ADDR = 1
+pkg net, const SCTP_BINDX_ADD_ADDR ideal-int
+pkg net, const SCTP_BINDX_REM_ADDR = 2
+pkg net, const SCTP_BINDX_REM_ADDR ideal-int
+pkg net, const SCTP_CONTEXT = 17
+pkg net, const SCTP_CONTEXT ideal-int
+pkg net, const SCTP_DEFAULT_SEND_PARAM = 10
+pkg net, const SCTP_DEFAULT_SEND_PARAM ideal-int
+pkg net, const SCTP_DEFAULT_SNDINFO = 34
+pkg net, const SCTP_DEFAULT_SNDINFO ideal-int
+pkg net, const SCTP_DELAYED_ACK = 16
+pkg net, const SCTP_DELAYED_ACK ideal-int
+pkg net, const SCTP_DELAYED_ACK_TIME = 16
+pkg net, const SCTP_DELAYED_ACK_TIME ideal-int
+pkg net, const SCTP_DELAYED_SACK = 16
+pkg net, const SCTP_DELAYED_SACK ideal-int
+pkg net, const SCTP_DISABLE_FRAGMENTS = 8
+pkg net, const SCTP_DISABLE_FRAGMENTS ideal-int
+pkg net, const SCTP_EVENTS = 11
+pkg net, const SCTP_EVENTS ideal-int
+pkg net, const SCTP_FRAGMENT_INTERLEAVE = 18
+pkg net, const SCTP_FRAGMENT_INTERLEAVE ideal-int
+pkg net, const SCTP_GET_ASSOC_ID_LIST = 29
+pkg net, const SCTP_GET_ASSOC_ID_LIST ideal-int
+pkg net, const SCTP_GET_ASSOC_NUMBER = 28
+pkg net, const SCTP_GET_ASSOC_NUMBER ideal-int
+pkg net, const SCTP_GET_ASSOC_STATS = 112
+pkg net, const SCTP_GET_ASSOC_STATS ideal-int
+pkg net, const SCTP_GET_LOCAL_ADDRS = 109
+pkg net, const SCTP_GET_LOCAL_ADDRS ideal-int
+pkg net, const SCTP_GET_PEER_ADDRS = 108
+pkg net, const SCTP_GET_PEER_ADDRS ideal-int
+pkg net, const SCTP_GET_PEER_ADDR_INFO = 15
+pkg net, const SCTP_GET_PEER_ADDR_INFO ideal-int
+pkg net, const SCTP_HMAC_IDENT = 22
+pkg net, const SCTP_HMAC_IDENT ideal-int
+pkg net, const SCTP_INIT = 0
+pkg net, const SCTP_INIT ideal-int
+pkg net, const SCTP_INITMSG = 2
+pkg net, const SCTP_INITMSG ideal-int
+pkg net, const SCTP_I_WANT_MAPPED_V4_ADDR = 12
+pkg net, const SCTP_I_WANT_MAPPED_V4_ADDR ideal-int
+pkg net, const SCTP_LOCAL_AUTH_CHUNKS = 27
+pkg net, const SCTP_LOCAL_AUTH_CHUNKS ideal-int
+pkg net, const SCTP_MAXSEG = 13
+pkg net, const SCTP_MAXSEG ideal-int
+pkg net, const SCTP_MAX_BURST = 20
+pkg net, const SCTP_MAX_BURST ideal-int
+pkg net, const SCTP_NODELAY = 3
+pkg net, const SCTP_NODELAY ideal-int
+pkg net, const SCTP_NXTINFO = 4
+pkg net, const SCTP_NXTINFO ideal-int
+pkg net, const SCTP_PARTIAL_DELIVERY_EVENT = 32774
+pkg net, const SCTP_PARTIAL_DELIVERY_EVENT ideal-int
+pkg net, const SCTP_PARTIAL_DELIVERY_POINT = 19
+pkg net, const SCTP_PARTIAL_DELIVERY_POINT ideal-int
+pkg net, const SCTP_PEER_ADDR_CHANGE = 32770
+pkg net, const SCTP_PEER_ADDR_CHANGE ideal-int
+pkg net, const SCTP_PEER_ADDR_PARAMS = 9
+pkg net, const SCTP_PEER_ADDR_PARAMS ideal-int
+pkg net, const SCTP_PEER_ADDR_THLDS = 31
+pkg net, const SCTP_PEER_ADDR_THLDS ideal-int
+pkg net, const SCTP_PEER_AUTH_CHUNKS = 26
+pkg net, const SCTP_PEER_AUTH_CHUNKS ideal-int
+pkg net, const SCTP_PRIMARY_ADDR = 6
+pkg net, const SCTP_PRIMARY_ADDR ideal-int
+pkg net, const SCTP_RCVINFO = 3
+pkg net, const SCTP_RCVINFO ideal-int
+pkg net, const SCTP_RECVNXTINFO = 33
+pkg net, const SCTP_RECVNXTINFO ideal-int
+pkg net, const SCTP_RECVRCVINFO = 32
+pkg net, const SCTP_RECVRCVINFO ideal-int
+pkg net, const SCTP_REMOTE_ERROR = 32772
+pkg net, const SCTP_REMOTE_ERROR ideal-int
+pkg net, const SCTP_RTOINFO = 0
+pkg net, const SCTP_RTOINFO ideal-int
+pkg net, const SCTP_SENDER_DRY_EVENT = 32777
+pkg net, const SCTP_SENDER_DRY_EVENT ideal-int
+pkg net, const SCTP_SEND_FAILED = 32771
+pkg net, const SCTP_SEND_FAILED ideal-int
+pkg net, const SCTP_SET_PEER_PRIMARY_ADDR = 5
+pkg net, const SCTP_SET_PEER_PRIMARY_ADDR ideal-int
+pkg net, const SCTP_SHUTDOWN_EVENT = 32773
+pkg net, const SCTP_SHUTDOWN_EVENT ideal-int
+pkg net, const SCTP_SNDINFO = 2
+pkg net, const SCTP_SNDINFO ideal-int
+pkg net, const SCTP_SNDRCV = 1
+pkg net, const SCTP_SNDRCV ideal-int
+pkg net, const SCTP_SOCKOPT_BINDX_ADD = 100
+pkg net, const SCTP_SOCKOPT_BINDX_ADD ideal-int
+pkg net, const SCTP_SOCKOPT_BINDX_REM = 101
+pkg net, const SCTP_SOCKOPT_BINDX_REM ideal-int
+pkg net, const SCTP_SOCKOPT_CONNECTX = 110
+pkg net, const SCTP_SOCKOPT_CONNECTX ideal-int
+pkg net, const SCTP_SOCKOPT_CONNECTX3 = 111
+pkg net, const SCTP_SOCKOPT_CONNECTX3 ideal-int
+pkg net, const SCTP_SOCKOPT_CONNECTX_OLD = 107
+pkg net, const SCTP_SOCKOPT_CONNECTX_OLD ideal-int
+pkg net, const SCTP_SOCKOPT_PEELOFF = 102
+pkg net, const SCTP_SOCKOPT_PEELOFF ideal-int
+pkg net, const SCTP_STATUS = 14
+pkg net, const SCTP_STATUS ideal-int
+pkg net, func DialSCTP(string, *SCTPAddr, *SCTPAddr) (*SCTPConn, error)
+pkg net, func ListenSCTP(string, *SCTPAddr) (*SCTPListener, error)
+pkg net, func ResolveSCTPAddr(string, string) (*SCTPAddr, error)
+pkg net, method (*SCTPAddr) Network() string
+pkg net, method (*SCTPAddr) String() string
+pkg net, method (*SCTPConn) Close() error
+pkg net, method (*SCTPConn) CloseRead() error
+pkg net, method (*SCTPConn) CloseWrite() error
+pkg net, method (*SCTPConn) File() (*os.File, error)
+pkg net, method (*SCTPConn) LocalAddr() Addr
+pkg net, method (*SCTPConn) Read([]uint8) (int, error)
+pkg net, method (*SCTPConn) ReadFrom(io.Reader) (int64, error)
+pkg net, method (*SCTPConn) RemoteAddr() Addr
+pkg net, method (*SCTPConn) SetDeadline(time.Time) error
+pkg net, method (*SCTPConn) SetKeepAlive(bool) error
+pkg net, method (*SCTPConn) SetKeepAlivePeriod(time.Duration) error
+pkg net, method (*SCTPConn) SetLinger(int) error
+pkg net, method (*SCTPConn) SetNoDelay(bool) error
+pkg net, method (*SCTPConn) SetReadBuffer(int) error
+pkg net, method (*SCTPConn) SetReadDeadline(time.Time) error
+pkg net, method (*SCTPConn) SetWriteBuffer(int) error
+pkg net, method (*SCTPConn) SetWriteDeadline(time.Time) error
+pkg net, method (*SCTPConn) Write([]uint8) (int, error)
+pkg net, method (*SCTPListener) Accept() (Conn, error)
+pkg net, method (*SCTPListener) AcceptSCTP() (*SCTPConn, error)
+pkg net, method (*SCTPListener) Addr() Addr
+pkg net, method (*SCTPListener) Close() error
+pkg net, method (*SCTPListener) File() (*os.File, error)
+pkg net, method (*SCTPListener) SetDeadline(time.Time) error
+pkg net, type SCTPAddr struct
+pkg net, type SCTPAddr struct, IP IP
+pkg net, type SCTPAddr struct, Port int
+pkg net, type SCTPAddr struct, Zone string
+pkg net, type SCTPConn struct
+pkg net, type SCTPListener struct
