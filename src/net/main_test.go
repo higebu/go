@@ -63,8 +63,9 @@ type ipv6LinkLocalUnicastTest struct {
 }
 
 var (
-	ipv6LinkLocalUnicastTCPTests []ipv6LinkLocalUnicastTest
-	ipv6LinkLocalUnicastUDPTests []ipv6LinkLocalUnicastTest
+	ipv6LinkLocalUnicastTCPTests  []ipv6LinkLocalUnicastTest
+	ipv6LinkLocalUnicastUDPTests  []ipv6LinkLocalUnicastTest
+	ipv6LinkLocalUnicastSCTPTests []ipv6LinkLocalUnicastTest
 )
 
 func setupTestData() {
@@ -81,12 +82,17 @@ func setupTestData() {
 			{"ip", "localhost", &IPAddr{IP: IPv4(127, 0, 0, 1)}, nil},
 			{"ip4", "localhost", &IPAddr{IP: IPv4(127, 0, 0, 1)}, nil},
 		}...)
+		resolveSCTPAddrTests = append(resolveSCTPAddrTests, []resolveSCTPAddrTest{
+			{"sctp", "localhost:1", &SCTPAddr{IP: IPv4(127, 0, 0, 1), Port: 1}, nil},
+			{"sctp4", "localhost:2", &SCTPAddr{IP: IPv4(127, 0, 0, 1), Port: 2}, nil},
+		}...)
 	}
 
 	if supportsIPv6 {
 		resolveTCPAddrTests = append(resolveTCPAddrTests, resolveTCPAddrTest{"tcp6", "localhost:3", &TCPAddr{IP: IPv6loopback, Port: 3}, nil})
 		resolveUDPAddrTests = append(resolveUDPAddrTests, resolveUDPAddrTest{"udp6", "localhost:3", &UDPAddr{IP: IPv6loopback, Port: 3}, nil})
 		resolveIPAddrTests = append(resolveIPAddrTests, resolveIPAddrTest{"ip6", "localhost", &IPAddr{IP: IPv6loopback}, nil})
+		resolveSCTPAddrTests = append(resolveSCTPAddrTests, resolveSCTPAddrTest{"sctp6", "localhost:3", &SCTPAddr{IP: IPv6loopback, Port: 3}, nil})
 	}
 
 	ifi := loopbackInterface()
@@ -103,6 +109,10 @@ func setupTestData() {
 		resolveIPAddrTests = append(resolveIPAddrTests, []resolveIPAddrTest{
 			{"ip6", "fe80::1%" + ifi.Name, &IPAddr{IP: ParseIP("fe80::1"), Zone: zoneToString(ifi.Index)}, nil},
 			{"ip6", "fe80::1%" + index, &IPAddr{IP: ParseIP("fe80::1"), Zone: index}, nil},
+		}...)
+		resolveSCTPAddrTests = append(resolveSCTPAddrTests, []resolveSCTPAddrTest{
+			{"sctp6", "[fe80::1%" + ifi.Name + "]:1", &SCTPAddr{IP: ParseIP("fe80::1"), Port: 1, Zone: zoneToString(ifi.Index)}, nil},
+			{"sctp6", "[fe80::1%" + index + "]:2", &SCTPAddr{IP: ParseIP("fe80::1"), Port: 2, Zone: index}, nil},
 		}...)
 	}
 
@@ -122,6 +132,9 @@ func setupTestData() {
 		ipv6LinkLocalUnicastUDPTests = append(ipv6LinkLocalUnicastUDPTests, []ipv6LinkLocalUnicastTest{
 			{"udp6", "[" + addr + "%" + ifi.Name + "]:0", false},
 		}...)
+		ipv6LinkLocalUnicastSCTPTests = append(ipv6LinkLocalUnicastSCTPTests, []ipv6LinkLocalUnicastTest{
+			{"sctp6", "[" + addr + "%" + ifi.Name + "]:0", false},
+		}...)
 		switch runtime.GOOS {
 		case "darwin", "dragonfly", "freebsd", "openbsd", "netbsd":
 			ipv6LinkLocalUnicastTCPTests = append(ipv6LinkLocalUnicastTCPTests, []ipv6LinkLocalUnicastTest{
@@ -140,6 +153,10 @@ func setupTestData() {
 			ipv6LinkLocalUnicastUDPTests = append(ipv6LinkLocalUnicastUDPTests, []ipv6LinkLocalUnicastTest{
 				{"udp", "[ip6-localhost%" + ifi.Name + "]:0", true},
 				{"udp6", "[ip6-localhost%" + ifi.Name + "]:0", true},
+			}...)
+			ipv6LinkLocalUnicastSCTPTests = append(ipv6LinkLocalUnicastSCTPTests, []ipv6LinkLocalUnicastTest{
+				{"sctp", "[ip6-localhost%" + ifi.Name + "]:0", true},
+				{"sctp6", "[ip6-localhost%" + ifi.Name + "]:0", true},
 			}...)
 		}
 	}
