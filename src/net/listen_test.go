@@ -410,6 +410,21 @@ func checkFirstListener(network string, ln interface{}) error {
 		if fd.family != syscall.AF_INET6 {
 			return fmt.Errorf("%v got %v; want %v", fd.laddr, fd.family, syscall.AF_INET6)
 		}
+	case "sctp":
+		fd := ln.(*SCTPListener).fd
+		if err := checkDualStackAddrFamily(fd); err != nil {
+			return err
+		}
+	case "sctp4":
+		fd := ln.(*SCTPListener).fd
+		if fd.family != syscall.AF_INET {
+			return fmt.Errorf("%v got %v; want %v", fd.laddr, fd.family, syscall.AF_INET)
+		}
+	case "sctp6":
+		fd := ln.(*SCTPListener).fd
+		if fd.family != syscall.AF_INET6 {
+			return fmt.Errorf("%v got %v; want %v", fd.laddr, fd.family, syscall.AF_INET6)
+		}
 	default:
 		return UnknownNetworkError(network)
 	}
@@ -426,6 +441,10 @@ func checkSecondListener(network, address string, err error) error {
 		if err == nil {
 			return fmt.Errorf("%s should fail", network+" "+address)
 		}
+	case "sctp", "sctp4", "sctp6":
+		if err == nil {
+			return fmt.Errorf("%s should fail", network+" "+address)
+		}
 	default:
 		return UnknownNetworkError(network)
 	}
@@ -439,6 +458,10 @@ func checkDualStackSecondListener(network, address string, err, xerr error) erro
 			return fmt.Errorf("%s got %v; want %v", network+" "+address, err, xerr)
 		}
 	case "udp", "udp4", "udp6":
+		if xerr == nil && err != nil || xerr != nil && err == nil {
+			return fmt.Errorf("%s got %v; want %v", network+" "+address, err, xerr)
+		}
+	case "sctp", "sctp4", "sctp6":
 		if xerr == nil && err != nil || xerr != nil && err == nil {
 			return fmt.Errorf("%s got %v; want %v", network+" "+address, err, xerr)
 		}
@@ -476,6 +499,20 @@ func checkDualStackAddrFamily(fd *netFD) error {
 		} else {
 			if fd.family != a.family() {
 				return fmt.Errorf("ListenPacket(%s, %v) returns %v; want %v", fd.net, fd.laddr, fd.family, a.family())
+			}
+		}
+	case *SCTPAddr:
+		// If a node under test supports both IPv6 capability
+		// and IPv6 IPv4-mapping capability, we can assume
+		// that the node listens on a wildcard address with an
+		// AF_INET6 socket.
+		if supportsIPv4map() && fd.laddr.(*SCTPAddr).isWildcard() {
+			if fd.family != syscall.AF_INET6 {
+				return fmt.Errorf("Listen(%s, %v) returns %v; want %v", fd.net, fd.laddr, fd.family, syscall.AF_INET6)
+			}
+		} else {
+			if fd.family != a.family() {
+				return fmt.Errorf("Listen(%s, %v) returns %v; want %v", fd.net, fd.laddr, fd.family, a.family())
 			}
 		}
 	default:

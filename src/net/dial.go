@@ -147,6 +147,7 @@ func parseNetwork(ctx context.Context, network string, needsProto bool) (afnet s
 				return "", 0, UnknownNetworkError(network)
 			}
 		case "unix", "unixgram", "unixpacket":
+		case "sctp", "sctp4", "sctp6":
 		default:
 			return "", 0, UnknownNetworkError(network)
 		}
@@ -198,6 +199,7 @@ func (r *Resolver) resolveAddrList(ctx context.Context, op, network, addr string
 		tcp      *TCPAddr
 		udp      *UDPAddr
 		ip       *IPAddr
+		sctp     *SCTPAddr
 		wildcard bool
 	)
 	switch hint := hint.(type) {
@@ -210,6 +212,9 @@ func (r *Resolver) resolveAddrList(ctx context.Context, op, network, addr string
 	case *IPAddr:
 		ip = hint
 		wildcard = ip.isWildcard()
+	case *SCTPAddr:
+		sctp = hint
+		wildcard = sctp.isWildcard()
 	}
 	naddrs := addrs[:0]
 	for _, addr := range addrs {
@@ -229,6 +234,11 @@ func (r *Resolver) resolveAddrList(ctx context.Context, op, network, addr string
 			naddrs = append(naddrs, addr)
 		case *IPAddr:
 			if !wildcard && !addr.isWildcard() && !addr.IP.matchAddrFamily(ip.IP) {
+				continue
+			}
+			naddrs = append(naddrs, addr)
+		case *SCTPAddr:
+			if !wildcard && !addr.isWildcard() && !addr.IP.matchAddrFamily(sctp.IP) {
 				continue
 			}
 			naddrs = append(naddrs, addr)
@@ -554,6 +564,9 @@ func dialSingle(ctx context.Context, dp *dialParam, ra Addr) (c Conn, err error)
 	case *UnixAddr:
 		la, _ := la.(*UnixAddr)
 		c, err = dialUnix(ctx, dp.network, la, ra)
+	case *SCTPAddr:
+		la, _ := la.(*SCTPAddr)
+		c, err = dialSCTP(ctx, dp.network, la, ra)
 	default:
 		return nil, &OpError{Op: "dial", Net: dp.network, Source: la, Addr: ra, Err: &AddrError{Err: "unexpected address type", Addr: dp.address}}
 	}
@@ -592,6 +605,8 @@ func Listen(network, address string) (Listener, error) {
 		l, err = ListenTCP(network, la)
 	case *UnixAddr:
 		l, err = ListenUnix(network, la)
+	case *SCTPAddr:
+		l, err = ListenSCTP(network, la)
 	default:
 		return nil, &OpError{Op: "listen", Net: network, Source: nil, Addr: la, Err: &AddrError{Err: "unexpected address type", Addr: address}}
 	}

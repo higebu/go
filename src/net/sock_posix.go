@@ -102,7 +102,12 @@ func (fd *netFD) addrFunc() func(syscall.Sockaddr) Addr {
 	case syscall.AF_INET, syscall.AF_INET6:
 		switch fd.sotype {
 		case syscall.SOCK_STREAM:
-			return sockaddrToTCP
+			switch fd.net {
+			case "sctp", "sctp4", "sctp6":
+				return sockaddrToSCTP
+			default:
+				return sockaddrToTCP
+			}
 		case syscall.SOCK_DGRAM:
 			return sockaddrToUDP
 		case syscall.SOCK_RAW:

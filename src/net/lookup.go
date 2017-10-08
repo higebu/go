@@ -23,6 +23,7 @@ var protocols = map[string]int{
 	"tcp":       6,
 	"udp":       17,
 	"ipv6-icmp": 58,
+	"sctp":      132,
 }
 
 // services contains minimal mappings between services names and port
@@ -79,6 +80,8 @@ func lookupPortMap(network, service string) (port int, error error) {
 		network = "tcp"
 	case "udp4", "udp6":
 		network = "udp"
+	case "sctp4", "sctp6":
+		network = "sctp"
 	}
 
 	if m, ok := services[network]; ok {

@@ -10,6 +10,9 @@ var (
 	// if non-nil, overrides dialTCP.
 	testHookDialTCP func(ctx context.Context, net string, laddr, raddr *TCPAddr) (*TCPConn, error)
 
+	// if non-nil, overrides dialSCTP.
+	testHookDialSCTP func(ctx context.Context, net string, laddr, raddr *SCTPAddr) (*SCTPConn, error)
+
 	testHookHostsPath = "/etc/hosts"
 	testHookLookupIP  = func(
 		ctx context.Context,
